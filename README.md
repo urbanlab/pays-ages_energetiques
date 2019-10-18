@@ -26,7 +26,8 @@ Devant lui se trouvent 6 tablettes, chacune présentera une déformation individ
 Enfin se trouve un écran sur lequel sera projeté l'image finale, projection réalisée grace au vidéoprojecteur connecté au PC
 
 ## Code et données
-Projet réalisé sur Glitch : https://glitch.com/edit/#!/paysages?path=README.md:1:0 
+Projet réalisé sur Glitch : https://glitch.com/edit/#!/paysages?path=README.md:1:0
+SUr github tout le code se trouve sur la branche "glitch". 
 Données issues de : https://data.enedis.fr/explore/?sort=modified et https://opendata.grdf.fr/pages/accueil/?flg=fr
 
 ## Réglages
