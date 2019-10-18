@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Paysages énergétiques</title>
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+
+    <meta name="description" content="Pays-Ages Energetiques">    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/details.css">
+  </head>
+  
+  <body>
+    <div>
+      <p id="place"></p>
+      <p>
+        <output name="yearOutputName" id="yearOutputId">2011</output>
+      </p>
+      <p>
+        <a href="/control">Retour</a>
+      </p>
+    </div>
+
+    <hr>
+    
+    <div id="data">
+      <div>
+        <span style="width: 20%; color:white">Eolien : </span><span id="eolien" style="background:white; height: 2px"></span>
+      </div>
+      <div>
+        <span style="width: 20%; color:white">Electricité :</span><span id="consommation_elec" style="background:white; height: 2px"></span>
+      </div>
+      <div>
+        <span style="width: 20%; color:white">Biomasse :</span><span id="biomasse" style="background:white; height: 2px"></span>
+      </div>
+      <div>
+        <span style="width: 20%; color:white">Gaz :</span><span id="consommation_gaz" style="background:white; height: 2px"></span>
+      </div>
+      <div>
+        <span style="width: 20%; color:white">Hydroélectrique :</span><span id="hydro" style="background:white; height: 2px"></span>
+      </div>
+      <div>
+        <span style="width: 20%; color:white">Solaire :</span><span id="solaire" style="background:white; height: 2px"></span>
+      </div>
+    </div>
+    
+  <form name="registrationForm">
+    <input type="range" name="yearInputName" id="yearInputId" list="tickmarks" value="2011" min="2011" max="2017" oninput="yearOutputId.value = yearInputId.value">
+    <datalist id="tickmarks">
+      <option value="2011" label="2011"></option>
+      <option value="2012" label="2012"></option>
+      <option value="2013" label="2013"></option>
+      <option value="2014" label="2014"></option>
+      <option value="2015" label="2015"></option>
+      <option value="2016" label="2016"></option>
+      <option value="2017" label="2017"></option>
+    </datalist>
+  </form>
+    
+    <script src="/socket.io/socket.io.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="/data.js"></script>
+    <script>
+      const socket = io();
+      
+      const id = parseInt((new URL(document.location)).searchParams.get('id')) || 0;
+      
+      document.querySelector('#place').innerText = data[id].titre;
+      
+      const keys = [
+        'eolien',
+        'consommation_elec',
+        'biomasse',
+        'consommation_gaz',
+        'hydro',
+        'solaire'
+      ]
+      let slider = document.querySelector('#yearInputId');
+      
+      
+      
+      function displayData() {
+        const yearID = 2017 - parseInt(slider.value);
+        //socket.emit('year', { year: yearID });
+        console.log(yearID);
+        
+        
+        keys.forEach(key => {
+          TweenMax.to(`#${key}`, 1, {
+            width: () => {
+              if(key.includes('consommation')) return (data[id][key][yearID] * 70) + '%'
+              
+              return ((1-data[id][key][yearID]) * 70) + '%'
+            }
+          })
+        })
+      }
+      
+      addEventListener('load', displayData)
+      slider.addEventListener('change', displayData)
+    </script>
+  </body>
+  
+  
+</html>
