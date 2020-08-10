@@ -1,0 +1,52 @@
+body {
+  background: black;
+}
+
+*{
+  margin: 10px;
+  padding:0;
+  color: white;
+  font-family: 'Inconsolata', monospace;
+}
+div {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+hr {
+  color: white;
+  size: 2;
+}
+
+h1 {
+  margin-top: 70px;
+  margin-bottom: 30px;
+  font-family: Inconsolata;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+input {
+  margin-top: 70px;
+  width: 100%;
+}
+
+datalist {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+br {
+  line-height:40px;
+}
+
+
+#data{
+  display: block;
+}
+
